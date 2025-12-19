@@ -264,3 +264,38 @@
   </script>
 </body>
 </html>
+<form action="https://formspree.io/f/xdankoka" method="POST">
+  <input type="email" name="email" placeholder="Add meg az email címed" required />
+  <button type="submit">Korai hozzáférés igénylése</button>
+</form>
+<form id="earlyAccessForm" action="https://formspree.io/f/xxxxxxx" method="POST">
+  <input type="email" name="email" required />
+  <button type="submit">Korai hozzáférés igénylése</button>
+</form>
+
+<div id="status"></div>
+
+<script>
+  const form = document.getElementById("earlyAccessForm");
+  const statusEl = document.getElementById("status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    statusEl.textContent = "Sending...";
+
+    const res = await fetch(form.action, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    });
+
+    if (res.ok) {
+      form.reset();
+      statusEl.textContent = "Thanks! You’re on the list ✅";
+    } else {
+      statusEl.textContent = "Oops — something went wrong.";
+    }
+  });
+</script>
+
+
