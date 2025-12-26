@@ -49,7 +49,6 @@
       margin: 0 0 1rem 0;
     }
 
-    /* Tabs */
     .tabs {
       display: flex;
       gap: 0.35rem;
@@ -83,10 +82,9 @@
       color: #3c096c;
     }
 
-    /* Animated content area */
     .content-area {
       position: relative;
-      min-height: 285px; /* hogy ne ugráljon a kártya */
+      min-height: 285px;
     }
 
     .content {
@@ -166,12 +164,10 @@
   <div class="signup-box">
     <div class="badge">AIEdu – AI tanulószoftver</div>
 
-    <!-- Tabs state -->
     <input type="radio" name="tabs" id="tab1" checked>
     <input type="radio" name="tabs" id="tab2">
     <input type="radio" name="tabs" id="tab3">
 
-    <!-- Tabs -->
     <div class="tabs">
       <label for="tab1">Feliratkozás</label>
       <label for="tab2">Névjegy</label>
@@ -179,8 +175,6 @@
     </div>
 
     <div class="content-area">
-
-      <!-- TAB 1 -->
       <div class="content content-1">
         <h1>Tanuld meg etikusan és produktívan használni az AI-t</h1>
         <p>
@@ -188,15 +182,12 @@
           használni a mesterséges intelligenciát.
         </p>
 
-        <!-- FORMSPREE BACKEND -->
+        <!-- EGYETLEN FORM (Formspree endpointtal) -->
         <form id="earlyAccessForm"
-              action="YOUR_FORMSPREE_ENDPOINT"
+              action="https://formspree.io/f/xdankoka"
               method="POST">
           <input type="email" name="email" placeholder="Add meg az email címed" required />
-
-          <!-- opcionális extra mezők -->
           <input type="hidden" name="_subject" value="Új korai hozzáférés feliratkozás (AIEdu)" />
-
           <button type="submit">Korai hozzáférés igénylése</button>
         </form>
 
@@ -207,7 +198,6 @@
         </div>
       </div>
 
-      <!-- TAB 2 -->
       <div class="content content-2">
         <h1>Névjegy</h1>
         <p>
@@ -215,24 +205,19 @@
           tanítsa meg a mesterséges intelligencia használatát diákoknak, vállalkozóknak
           és szakembereknek.
         </p>
-        <p>
-          Nem csak eszközöket tanítunk – gondolkodásmódot adunk.
-        </p>
+        <p>Nem csak eszközöket tanítunk – gondolkodásmódot adunk.</p>
       </div>
 
-      <!-- TAB 3 -->
       <div class="content content-3">
         <h1>Elérhetőségek</h1>
         <div class="contact-item">📧 Email: liceumdynamics@gmail.com</div>
         <div class="contact-item">🌐 Web: https://liceumdynamics.github.io</div>
         <div class="contact-item">📍 Magyarország</div>
       </div>
-
     </div>
   </div>
 
   <script>
-    // AJAX submit (nem dob át másik oldalra, hanem kiírja a státuszt)
     const form = document.getElementById("earlyAccessForm");
     const statusEl = document.getElementById("formStatus");
 
@@ -264,38 +249,7 @@
   </script>
 </body>
 </html>
-<form action="https://formspree.io/f/xdankoka" method="POST">
-  <input type="email" name="email" placeholder="Add meg az email címed" required />
-  <button type="submit">Korai hozzáférés igénylése</button>
-</form>
-<form id="earlyAccessForm" action="https://formspree.io/f/xxxxxxx" method="POST">
-  <input type="email" name="email" required />
-  <button type="submit">Korai hozzáférés igénylése</button>
-</form>
 
-<div id="status"></div>
-
-<script>
-  const form = document.getElementById("earlyAccessForm");
-  const statusEl = document.getElementById("status");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    statusEl.textContent = "Sending...";
-
-    const res = await fetch(form.action, {
-      method: "POST",
-      headers: { "Accept": "application/json" },
-      body: new FormData(form)
-    });
-
-    if (res.ok) {
-      form.reset();
-      statusEl.textContent = "Thanks! You’re on the list ✅";
-    } else {
-      statusEl.textContent = "Oops — something went wrong.";
-    }
-  });
 </script>
 
 
